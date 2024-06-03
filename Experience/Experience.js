@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import Sizes from "./Utils/Sizes.js";
+import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
 import Resources from "./Utils/Resources";
 import assets from "./Utils/assets";
