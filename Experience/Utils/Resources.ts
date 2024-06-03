@@ -1,29 +1,51 @@
 import * as THREE from "three";
 
 import { EventEmitter } from "events";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import Experience from "../Experience.js";
-import { Asset } from "./assets.js";
+import { Asset } from "./assets";
+import Renderer from "../Renderer.js";
 
+type Loader = {
+  gltfLoader: GLTFLoader;
+  dracoLoader: DRACOLoader;
+};
+type Item = {
+  name: string;
+  type: string;
+  path: string;
+};
+
+type Video = {
+  [key: string]: HTMLVideoElement;
+};
+
+type VideoTexture = {
+  [key: string]: THREE.VideoTexture;
+};
 export default class Resources extends EventEmitter {
   experience: Experience;
-  renderer: any;
+  renderer: Renderer | undefined;
   assets: Asset[];
-  items: {};
-  queue: any;
+  items: Item;
+  queue: number;
   loaded: number;
-  loaders: {};
-  video: {};
-  videoTexture: {};
-  constructor(assets) {
+  loaders: Loader;
+  video: Video;
+  videoTexture: VideoTexture;
+  constructor(assets: Asset[]) {
     super();
     this.experience = new Experience();
     this.renderer = this.experience.renderer;
 
     this.assets = assets;
 
-    this.items = {};
+    this.items = {
+      name: "",
+      type: "",
+      path: "",
+    };
     this.queue = this.assets.length;
     this.loaded = 0;
 
@@ -32,9 +54,10 @@ export default class Resources extends EventEmitter {
   }
 
   setLoaders() {
-    this.loaders = {};
-    this.loaders.gltfLoader = new GLTFLoader();
-    this.loaders.dracoLoader = new DRACOLoader();
+    this.loaders = {
+      gltfLoader: new GLTFLoader(),
+      dracoLoader: new DRACOLoader(),
+    };
     this.loaders.dracoLoader.setDecoderPath("/draco/");
     this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
   }
@@ -63,14 +86,16 @@ export default class Resources extends EventEmitter {
         this.videoTexture[asset.name].minFilter = THREE.NearestFilter;
         this.videoTexture[asset.name].magFilter = THREE.NearestFilter;
         this.videoTexture[asset.name].generateMipmaps = false;
-        this.videoTexture[asset.name].encoding = THREE.sRGBEncoding;
+        (this.videoTexture[asset.name] as any).encoding = (
+          THREE as any
+        ).sRGBEncoding;
 
         this.singleAssetLoaded(asset, this.videoTexture[asset.name]);
       }
     }
   }
 
-  singleAssetLoaded(asset, file) {
+  singleAssetLoaded(asset: Asset, file: GLTF | THREE.VideoTexture) {
     this.items[asset.name] = file;
     this.loaded++;
 
