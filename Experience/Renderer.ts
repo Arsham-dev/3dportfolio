@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import Experience from "./Experience.js";
-import Sizes from "./Utils/Sizes.js";
-import Camera from "./Camera.js";
+import Experience from "./Experience";
+import Sizes from "./Utils/Sizes";
+import Camera from "./Camera";
 
 export default class Renderer {
   experience: Experience;

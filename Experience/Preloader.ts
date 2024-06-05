@@ -1,9 +1,29 @@
 import { EventEmitter } from "events";
 import Experience from "./Experience.js";
 import GSAP from "gsap";
-import convert from "./Utils/covertDivsToSpans";
+import convert from "./Utils/covertDivsToSpans.js";
+import { Scene } from "three";
+import Sizes from "./Utils/Sizes.js";
+import Resources from "./Utils/Resources.js";
+import Camera from "./Camera.js";
+import World from "./World/World.js";
 
 export default class Preloader extends EventEmitter {
+  experience: Experience;
+  scene: Scene;
+  sizes: Sizes;
+  resources: Resources;
+  camera: Camera;
+  world: World;
+  device: string;
+  room: any;
+  roomChildren: any;
+  timeline: gsap.core.Timeline;
+  secondTimeline: gsap.core.Timeline;
+  initalY: any;
+  intialY: null;
+  scaleFlag: boolean;
+  moveFlag: boolean;
   constructor() {
     super();
     this.experience = new Experience();
@@ -33,18 +53,17 @@ export default class Preloader extends EventEmitter {
 
     this.room = this.experience.world.room.actualRoom;
     this.roomChildren = this.experience.world.room.roomChildren;
-    console.log(this.roomChildren);
   }
 
   firstIntro() {
     return new Promise((resolve) => {
-      this.timeline = new GSAP.timeline();
+      this.timeline = GSAP.timeline();
       this.timeline.set(".animatedis", { y: 0, yPercent: 100 });
       this.timeline.to(".preloader", {
         opacity: 0,
         delay: 1,
         onComplete: () => {
-          document.querySelector(".preloader").classList.add("hidden");
+          document.querySelector(".preloader")?.classList.add("hidden");
         },
       });
       if (this.device === "desktop") {
@@ -102,7 +121,7 @@ export default class Preloader extends EventEmitter {
 
   secondIntro() {
     return new Promise((resolve) => {
-      this.secondTimeline = new GSAP.timeline();
+      this.secondTimeline = GSAP.timeline();
 
       this.secondTimeline
         .to(
@@ -356,6 +375,15 @@ export default class Preloader extends EventEmitter {
     window.removeEventListener("wheel", this.scrollOnceEvent);
     window.removeEventListener("touchstart", this.touchStart);
     window.removeEventListener("touchmove", this.touchMove);
+  }
+  scrollOnceEvent() {
+    throw new Error("Method not implemented.");
+  }
+  touchStart() {
+    throw new Error("Method not implemented.");
+  }
+  touchMove() {
+    throw new Error("Method not implemented.");
   }
 
   async playIntro() {

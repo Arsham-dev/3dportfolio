@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import Experience from "../Experience.js";
+import Experience from "../Experience";
 import GSAP from "gsap";
-import Resources from "../Utils/Resources.js";
-import Time from "../Utils/Time.js";
+import Resources from "../Utils/Resources";
+import Time from "../Utils/Time";
 
 export default class Room {
   experience: Experience;

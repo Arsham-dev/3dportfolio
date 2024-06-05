@@ -1,6 +1,6 @@
-import Experience from "../Experience.js";
+import Experience from "../Experience";
 import GSAP from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger.js";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ASScroll from "@ashthornton/asscroll";
 import {
   CircleGeometry,
@@ -11,8 +11,8 @@ import {
 } from "three";
 import Sizes from "../Utils/Sizes";
 import Resources from "../Utils/Resources";
-import Time from "../Utils/Time.js";
-import Camera from "../Camera.js";
+import Time from "../Utils/Time";
+import Camera from "../Camera";
 
 export default class Controls {
   experience: Experience;
@@ -93,7 +93,7 @@ export default class Controls {
     ScrollTrigger.scrollerProxy(asscroll.containerElement, {
       scrollTop(value) {
         if (arguments.length) {
-          asscroll.currentPos = value;
+          asscroll.currentPos = value ?? 0;
           return;
         }
         return asscroll.currentPos;

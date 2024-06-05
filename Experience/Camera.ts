@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import Experience from "./Experience.js";
+import Experience from "./Experience";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import Sizes from "./Utils/Sizes.js";
+import Sizes from "./Utils/Sizes";
 
 export default class Camera {
   experience: Experience;

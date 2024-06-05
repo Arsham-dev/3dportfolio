@@ -1,14 +1,14 @@
-import Experience from "../Experience.js";
+import Experience from "../Experience";
 
-import Room from "./Room.js";
-import Floor from "./Floor.js";
-import Environment from "./Environment.js";
+import Room from "./Room";
+import Floor from "./Floor";
+import Environment from "./Environment";
 import { EventEmitter } from "events";
-import Sizes from "../Utils/Sizes.js";
+import Sizes from "../Utils/Sizes";
 import { Scene } from "three";
-import Camera from "../Camera.js";
-import Resources from "../Utils/Resources.js";
-import Theme from "../Theme.js";
+import Camera from "../Camera";
+import Resources from "../Utils/Resources";
+import Theme from "../Theme";
 
 export default class World extends EventEmitter {
   experience: Experience;
