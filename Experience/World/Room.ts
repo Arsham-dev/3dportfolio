@@ -6,9 +6,9 @@ import Time from "../Utils/Time.js";
 
 export default class Room {
   experience: Experience;
-  scene: THREE.Scene | undefined;
-  resources: Resources | undefined;
-  time: Time | undefined;
+  scene: THREE.Scene;
+  resources: Resources;
+  time: Time;
   room: any;
   actualRoom: any;
   roomChildren: {};
@@ -22,7 +22,7 @@ export default class Room {
     this.resources = this.experience.resources;
     this.time = this.experience.time;
     // NEED TO FIX THIS
-    this.room = (this.resources?.items as any).room;
+    this.room = (this.resources.items as any).room;
     this.actualRoom = this.room.scene;
     this.roomChildren = {};
 
@@ -62,7 +62,7 @@ export default class Room {
 
       if (child.name === "Computer") {
         child.children[1].material = new THREE.MeshBasicMaterial({
-          map: (this.resources?.items as any).screen,
+          map: (this.resources.items as any).screen,
         });
       }
 
@@ -96,7 +96,7 @@ export default class Room {
 
     this.roomChildren["rectLight"] = rectLight;
 
-    this.scene?.add(this.actualRoom);
+    this.scene.add(this.actualRoom);
     this.actualRoom.scale.set(0.11, 0.11, 0.11);
   }
 
@@ -125,6 +125,6 @@ export default class Room {
 
     this.actualRoom.rotation.y = this.lerp.current;
 
-    this.mixer.update(this.time?.delta! * 0.0009);
+    this.mixer.update(this.time.delta! * 0.0009);
   }
 }

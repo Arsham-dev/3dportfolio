@@ -2,10 +2,26 @@ import Experience from "../Experience.js";
 
 import Room from "./Room.js";
 import Floor from "./Floor.js";
-import Environment from "./Environment";
+import Environment from "./Environment.js";
 import { EventEmitter } from "events";
+import Sizes from "../Utils/Sizes.js";
+import { Scene } from "three";
+import Camera from "../Camera.js";
+import Resources from "../Utils/Resources.js";
+import Theme from "../Theme.js";
 
 export default class World extends EventEmitter {
+  experience: Experience;
+  sizes: Sizes;
+  scene: Scene;
+  canvas: any;
+  camera: Camera;
+  resources: Resources;
+  theme: Theme;
+  environment: Environment;
+  floor: Floor;
+  room: Room;
+  controls: any;
   constructor() {
     super();
     this.experience = new Experience();
@@ -20,17 +36,12 @@ export default class World extends EventEmitter {
       this.environment = new Environment();
       this.floor = new Floor();
       this.room = new Room();
-      // this.controls = new Controls();
       this.emit("worldready");
     });
 
     this.theme.on("switch", (theme) => {
       this.switchTheme(theme);
     });
-
-    // this.sizes.on("switchdevice", (device) => {
-    //     this.switchDevice(device);
-    // });
   }
 
   switchTheme(theme) {
@@ -38,12 +49,6 @@ export default class World extends EventEmitter {
       this.environment.switchTheme(theme);
     }
   }
-
-  // switchDevice(device) {
-  //     if (this.controls) {
-  //         this.controls.switchDevice(device);
-  //     }
-  // }
 
   resize() {}
 

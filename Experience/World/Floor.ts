@@ -3,7 +3,7 @@ import Experience from "../Experience.js";
 
 export default class Floor {
   experience: Experience;
-  scene: THREE.Scene | undefined;
+  scene: THREE.Scene;
   geometry: THREE.PlaneGeometry;
   material: THREE.MeshStandardMaterial;
   plane: THREE.Mesh<any, any, THREE.Object3DEventMap>;
@@ -37,7 +37,7 @@ export default class Floor {
       side: THREE.BackSide,
     });
     this.plane = new THREE.Mesh(this.geometry, this.material);
-    this.scene?.add(this.plane);
+    this.scene.add(this.plane);
     this.plane.rotation.x = Math.PI / 2;
     this.plane.position.y = -0.3;
     this.plane.receiveShadow = true;
@@ -74,9 +74,9 @@ export default class Floor {
       this.circleThird.receiveShadow =
         true;
 
-    this.scene?.add(this.circleFirst);
-    this.scene?.add(this.circleSecond);
-    this.scene?.add(this.circleThird);
+    this.scene.add(this.circleFirst);
+    this.scene.add(this.circleSecond);
+    this.scene.add(this.circleThird);
   }
 
   resize() {}
