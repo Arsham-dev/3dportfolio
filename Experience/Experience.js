@@ -6,7 +6,7 @@ import Resources from "./Utils/Resources";
 import assets from "./Utils/assets";
 
 import Camera from "./Camera.js";
-import Theme from "./Theme.js";
+import Theme from "./Theme";
 import Renderer from "./Renderer.js";
 import Preloader from "./Preloader.js";
 
