@@ -1,12 +1,12 @@
 import { EventEmitter } from "events";
-import Experience from "./Experience.js";
+import Experience from "./Experience";
 import GSAP from "gsap";
-import convert from "./Utils/covertDivsToSpans.js";
+import convert from "./Utils/covertDivsToSpans";
 import { Scene } from "three";
-import Sizes from "./Utils/Sizes.js";
-import Resources from "./Utils/Resources.js";
-import Camera from "./Camera.js";
-import World from "./World/World.js";
+import Sizes from "./Utils/Sizes";
+import Resources from "./Utils/Resources";
+import Camera from "./Camera";
+import World from "./World/World";
 
 export default class Preloader extends EventEmitter {
   experience: Experience;
