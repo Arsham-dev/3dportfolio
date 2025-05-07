@@ -1,0 +1,6 @@
+services:
+  3dwebsite:
+    build: .
+    ports:
+      - '3101:3101'
+    restart: unless-stopped
