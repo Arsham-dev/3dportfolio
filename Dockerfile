@@ -9,7 +9,7 @@
     RUN yarn build
     
     # ---------- Runner Stage ----------
-    FROM node:24-slim AS builder
+    FROM node:24-slim AS runner
     
     WORKDIR /app
     
