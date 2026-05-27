@@ -1,5 +1,4 @@
-# ---------- Builder Stage ----------
-    FROM node:slim AS builder
+    FROM node:24-slim AS builder
 
     WORKDIR /app
     
@@ -10,7 +9,7 @@
     RUN yarn build
     
     # ---------- Runner Stage ----------
-    FROM node:slim AS runner
+    FROM node:24-slim AS builder
     
     WORKDIR /app
     
